@@ -4,16 +4,16 @@
   "description": "100Devs Social Network",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"nodemon server.js\" \"tailwindcss -i ./public/css/style.css -o ./public/output.css --watch\" ",
-    "build":"tailwindcss -i ./public/css/style.css -o ./public/output.css"
-
+    "build": "tailwindcss -i ./public/css/style.css -o ./public/output.css"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.25.1",
+    "concurrently": "^7.5.0",
     "connect-mongo": "^3.2.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",

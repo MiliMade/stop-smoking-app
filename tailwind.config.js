@@ -7,7 +7,11 @@ module.exports = {
   "./views/partials/*.ejs"
 ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'permanent-marker': ['Permanent Marker', 'cursive']
+      },
+    },
   },
   plugins: [],
 }
