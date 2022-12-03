@@ -10,6 +10,7 @@
               class="text-white">
                 <h2 class="text-4xl font-bold text-center text-white my-6">Add An Entry</h2>
                 
+                <!-- Form fields to check if the user smoked -->
                 <div class="mb-3" id="didjaSmoke">
                     <fieldset>
                         <legend class="form-label text-2xl my-3">Did you smoke today?</legend>
@@ -21,6 +22,7 @@
                     </fieldset>
                 </div>
 
+                <!-- Form fields that check what triggered user to smoke -->
                 <div class="mb-3" id="triggerField">
                     <fieldset>
                         <legend class="form-label text-2xl my-3">What triggered you?</legend>
@@ -120,10 +122,12 @@
                     </fieldset>
                 </div>
 
+                <!-- Form fields that check how user is feeling -->
                 <div class="mb-3">
-                    <!-- will need reformatting based on how we decide we want to handle moods -->
                     <fieldset>
                         <legend class="form-label text-2xl my-3">How are you feeling today?</legend>
+                        
+                        <!-- Rate anxiety on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl">Anxious</legend>
                             <input type="radio" id="anxious1" name="anxietyLevel" value="1">
@@ -157,6 +161,7 @@
                             <label for="anxious10" class="form-label">10</label>
                         </fieldset>
 
+                        <!-- Rate excitement on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl mt-3">Excited</legend>
                             <input type="radio" id="excited1" name="excitementLevel" value="1">
@@ -190,6 +195,7 @@
                             <label for="excited10" class="form-label">10</label>
                         </fieldset>
 
+                        <!-- Rate boredom on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl mt-3">Bored</legend>
                             <input type="radio" id="bored1" name="boredomLevel" value="1">
@@ -223,6 +229,7 @@
                             <label for="bored10" class="form-label">10</label>
                         </fieldset>
 
+                        <!-- Rate sadness on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl mt-3">Sad</legend>
                             <input type="radio" id="sad1" name="sadnessLevel" value="1">
@@ -256,6 +263,7 @@
                             <label for="sad10" class="form-label">10</label>
                         </fieldset>
 
+                        <!-- Rate happiness on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl mt-3">Happy</legend>
                             <input type="radio" id="happy1" name="happinessLevel" value="1">
@@ -289,6 +297,7 @@
                             <label for="happy10" class="form-label">10</label>
                         </fieldset>
 
+                        <!-- Rate loneliness on scale of 1-10 -->
                         <fieldset class="my-3">
                             <legend class="form-label text-xl mt-3">Lonely</legend>
                             <input type="radio" id="lonely1" name="lonelinessLevel" value="1">
@@ -329,10 +338,10 @@
 
                 </div>
 
+                <!-- Rate cravings level on scale of 1-10 -->
                 <div class="mb-3">
-                    <!-- cravings scale currently set for 1-10 based on schema, might be better to use 1-5? -->
                     <fieldset class="mb-6">
-                        <legend class="form-label text-2xl my-3">On a scale of 1 to 10, how badly do you want to smoke?</legend>
+                        <legend class="form-label text-2xl my-3">On a scale of 1 to 10, how strong is your craving to smoke?</legend>
                         <input type="radio" id="craving1" name="cravingsLevel" value="1">
                         <label for="craving1" class="form-label">1</label>
 
@@ -365,16 +374,16 @@
                     </fieldset>
                     
                 </div>
-
+                
                 <button 
                   type="submit"  
                   value="Upload"
-                  class="w-3/4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  class="w-3/4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-900 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                     Submit
                 </button>
               </form>
               <br>
-              <button type="button" class="w-3/4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"><a href="/profile">Return to Profile</a></button>
+              <button type="button" class="w-3/4 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-600 rounded-md hover:bg-purple-800 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"><a href="/profile">Return to Profile</a></button>
             
             </div>
         </div>

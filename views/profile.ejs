@@ -1,84 +1,127 @@
 <%- include('partials/loggedInHeader') -%>
-<div class="bg-gray-900 h-screen text-white">
-  <div class="mx-auto max-w-screen-xl pt-32 pb-12 lg:h-screen">
-      <div class="">
-          <div>
-              <p class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl px-4 mb-6 text-center">Hi, <%= user.userName %>!</p>
-          </div>
-          <!-- TODAY'S MESSGAGE POPUP HERE -->
-          <div class="msg px-4">
-            <h3 class="text-2xl font-extrabold sm:text-3xl mb-6 text-center">
-              <% if (streak === 0) { %>
-                You can do this!
-              <% } else if (0 < streak <=7) { %>
-                Great work!
-              <% } else if ( streak >= 8) { %>
-                You're incredible!  
-              <% } %>
-            </h3>
-            
-            <p class="text-2xl font-extrabold sm:text-3xl mb-6 text-center px-4">You're on a <%= streak %> day streak!</p>
-            <% if (streak > 0) {%>
-              <p class="text-center">Now that you've stopped smoking for 
-                <% if(streak === 1) {%>
-                  <%= streak %> day
-                <% } else {%>
-                  <%= streak %> days
-                <% } %>:<br>
-                <%= message %>
-              </p>
-            <% } %>
-            <br>
-
-            <p class="text-center px-4">You've also saved $<%= Number.parseFloat(streak * user.dailyCost).toFixed(2) %> by not smoking.</p>
-            
-          </div>
-
-          <div class="text-2xl px-4 font-extrabold sm:text-3xl mb-6 pb-6 text-center">
-          <br>
-          <br>
-          <p>Click below to add an entry to your journal:</p>
-          <button type="button" class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> <a href="/journal">Journal</a></button>
-          </div>
-      </div>
-       
+<div class="bg-gray-900 h-screen text-white pb-12 ">
+  <div class="mx-auto max-w-screen-xl pt-32 lg:h-screen bg-gray-900">
+    <div class="bg-gray-900">
       <div>
-        <div>
-          <!-- CHART.JS Chart HERE -->      
-          <% function moodAverage(data) { %>
-            <% let array = [ craving = [], anxiety = [], excitement = [], bored = [], sadness = [], happiness = [], loneliness = [] ] %>
-            <% data.forEach(e => { %>
-              <% craving.push(e.cravingsLevel) %>
-              <% anxiety.push(e.anxietyLevel) %>
-              <% excitement.push(e.excitementLevel) %>
-              <% bored.push(e.boredomLevel) %>
-              <% sadness.push(e.sadnessLevel) %>
-              <% happiness.push(e.happinessLevel) %>
-              <% loneliness.push(e.lonelinessLevel) %>
-            <% }) %>
-            <% return array.map(n => n.reduce((prev, curr) => (prev + curr) / n.length, 0)) %>
+        <p class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl px-4 mb-6 text-center">Hi, <%= user.userName %>!</p>
+      </div>
+      <!-- TODAY'S MESSGAGE POPUP HERE -->
+      <div class="msg px-4">
+        <h3 class="text-2xl font-extrabold sm:text-3xl mb-6 text-center">
+          <% if (streak === 0) { %>
+            You can do this!
+          <% } else if (0 < streak <=7) { %>
+            Great work!
+          <% } else if ( streak >= 8) { %>
+            You're incredible!  
           <% } %>
-          <!-- <canvas id="myBarChart"></canvas> -->
-          <canvas id="myPolarChart" class="bg-white p-6 pt-8"></canvas>
-          <!-- <canvas id="myLineChart"></canvas> -->
-        </div>
+        </h3>
         
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <p class="text-2xl font-extrabold sm:text-3xl mb-6 text-center px-4">You're on a <%= streak %> day streak!</p>
+        <% if (streak > 0) {%>
+          <p class="text-center">Now that you've stopped smoking for 
+            <% if(streak === 1) {%>
+              <%= streak %> day
+            <% } else {%>
+              <%= streak %> days
+            <% } %>:<br>
+            <%= message %>
+          </p>
+        <% } %>
+        <br>
+        <p class="text-center px-4">You've also saved $<%= Number.parseFloat(streak * user.dailyCost).toFixed(2) %> by not smoking.</p>  
+      </div>
 
-        <!-- THESE TWO GRAPHS ARE FROM THE SAME DATA, MY BRAIN IS TOO TIRED TO FIGURE OUT WHICH ONE MAKES MOST SENSE TO USE -->
-        <!-- bar graph of averages for craving & moods -->
-        <!-- <script>
-          const ctx = document.getElementById('myBarChart');
-        
-          new Chart(ctx, {
-            type: 'bar',
+      <div class="text-2xl px-4 font-extrabold sm:text-3xl pb-6 text-center">
+        <br>
+        <br>
+        <p>Click below to add an entry to your journal:</p>
+        <button type="button" class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> <a href="/journal">Journal</a></button>
+      </div>
+    </div>
+       
+    <div class="chart-container bg-gray-900">
+        <!-- CHART.JS Chart HERE -->      
+        <% function moodAverage(data) { %>
+          <% let array = [ craving = [], anxiety = [], excitement = [], bored = [], sadness = [], happiness = [], loneliness = [] ] %>
+          <% data.forEach(e => { %>
+            <% craving.push(e.cravingsLevel) %>
+            <% anxiety.push(e.anxietyLevel) %>
+            <% excitement.push(e.excitementLevel) %>
+            <% bored.push(e.boredomLevel) %>
+            <% sadness.push(e.sadnessLevel) %>
+            <% happiness.push(e.happinessLevel) %>
+            <% loneliness.push(e.lonelinessLevel) %>
+          <% }) %>
+          <% return array.map(n => n.reduce((prev, curr) => (prev + curr) / n.length, 0)) %>
+        <% } %>
+        <canvas id="myPolarChart" class=""></canvas>
+        <!-- <canvas id="myLineChart"></canvas> -->
+
+
+      <!-- Tried to get a line plot of ratings levels for moods & craving over time, but chart.js isn't parsing the objects correctly. Error message: identifier starts immediately after numeric literal profile:211:13 (I'm pretty sure the issue is the object ids are being parsed incorrectly because they start as numbers and then include letters e.g. 637835dcdfb626446841aeca, but I have no idea how to fix it) -->
+      <!-- <script>
+          const lines = document.getElementById('myLineChart');
+          const data = [<%= journal %>.map(entry = {
+            for (let item in entry) {
+              if (entry.item)
+            }
+          })]
+          new Chart(lines, {
+            type: 'line',
             data: {
-              labels: ['Craving', 'Anxious', 'Excited', 'Bored', 'Sad', 'Happy', 'Lonely'],
-              datasets: [{
-                label: 'average',
-                data: [<%= moodAverage(journal) %>],
-                borderWidth: 1
-              }]
+              labels: [<%= journal %>].map(entry => entry.date.split('T')[0]),
+              datasets: [
+                {
+                  label: 'Craving',
+                  data: [<%= journal %>].map(entry => entry.cravingsLevel),
+                  fill: false,
+                  borderColor: 'rgb(75, 192, 192)',
+                  tension: 0.1
+                }, 
+                {
+                  label: 'Anxious',
+                  data: [<%= journal %>].map(entry => entry.anxietyLevel),
+                  fill: false,
+                  borderColor: 'rgb(20, 30, 40)',
+                  tension: 0.1
+                },
+                {
+                  label: 'Excited',
+                  data: [<%= journal %>].map(entry => entry.excitementLevel),
+                  fill: false,
+                  borderColor: 'rgb(227, 49, 30)',
+                  tension: 0.1
+                },
+                {
+                  label: 'Bored',
+                  data: [<%= journal %>].map(entry => entry.boredomLevel),
+                  fill: false,
+                  borderColor: 'rgb(163, 82, 235)',
+                  tension: 0.1
+                },
+                {
+                  label: 'Sad',
+                  data: [<%= journal %>].map(entry => entry.sadnessLevel),
+                  fill: false,
+                  borderColor: 'rgb(66, 179, 245)',
+                  tension: 0.1
+                },
+                {
+                  label: 'Happy',
+                  data: [<%= journal %>].map(entry => entry.happinessLevel),
+                  fill: false,
+                  borderColor: 'orange',
+                  tension: 0.1
+                },
+                {
+                  label: 'Lonely',
+                  data: [<%= journal %>].map(entry => entry.lonelinessLevel),
+                  fill: false,
+                  borderColor: 'blue',
+                  tension: 0.1
+                }
+              ]
             },
             options: {
               scales: {
@@ -89,126 +132,66 @@
             }
           });
         </script> -->
-  
-        <!-- polar area graph of averages for craving & moods -->
-        <script>
-          const polar = document.getElementById('myPolarChart');
-          new Chart(polar, {
-            type: 'polarArea',
-            data: {
-              labels: ['Craving', 'Anxiety', 'Excitement', 'Bored', 'Sad', 'Happy', 'Lonely'],
-              datasets: [{
-                label: 'Average',
-                data: [<%= moodAverage(journal) %>],
-                backgroundColor: [ //these are the wedge colors, pls change them to be less ugly
-                  '#441151',
-                  '#BAFF29',
-                  '#2892D7',
-                  '#9FD8CB',
-                  '#FF0000',
-                  '#FFC100',
-                  '#FF0F80',
-                ]
-              }]
-            },
-            options: {
-              plugins: {
-                title: {
-                  display: true,
-                  text: 'Your Average Mood and Craving Levels',
-                  color: 'rgb(20, 30, 40)',
-                  font: {
-                    size: 22
-                  }
-                }
-              },
-              legend: { //legend text is hard to read on dark background, but this isn't changing the text color and idk why
-                labels: {
-                  display: true,
-                  fontColor: 'white',
-                  font: {
-                    size: 22
-                  }
-                }
-              },
-            }
-          });
-        </script>
 
-        <!-- Tried to get a line plot of ratings levels for moods & craving over time, but chart.js isn't parsing the objects correctly. Error message: identifier starts immediately after numeric literal profile:211:13 (I'm pretty sure the issue is the object ids are being parsed incorrectly because they start as numbers and then include letters e.g. 637835dcdfb626446841aeca, but I have no idea how to fix it) -->
-        <!-- <script>
-            const lines = document.getElementById('myLineChart');
-            const data = [<%= journal %>.map(entry = {
-              for (let item in entry) {
-                if (entry.item)
-              }
-            })]
-            new Chart(lines, {
-              type: 'line',
-              data: {
-                labels: [<%= journal %>].map(entry => entry.date.split('T')[0]),
-                datasets: [
-                  {
-                    label: 'Craving',
-                    data: [<%= journal %>].map(entry => entry.cravingsLevel),
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                  }, 
-                  {
-                    label: 'Anxious',
-                    data: [<%= journal %>].map(entry => entry.anxietyLevel),
-                    fill: false,
-                    borderColor: 'rgb(20, 30, 40)',
-                    tension: 0.1
-                  },
-                  {
-                    label: 'Excited',
-                    data: [<%= journal %>].map(entry => entry.excitementLevel),
-                    fill: false,
-                    borderColor: 'rgb(227, 49, 30)',
-                    tension: 0.1
-                  },
-                  {
-                    label: 'Bored',
-                    data: [<%= journal %>].map(entry => entry.boredomLevel),
-                    fill: false,
-                    borderColor: 'rgb(163, 82, 235)',
-                    tension: 0.1
-                  },
-                  {
-                    label: 'Sad',
-                    data: [<%= journal %>].map(entry => entry.sadnessLevel),
-                    fill: false,
-                    borderColor: 'rgb(66, 179, 245)',
-                    tension: 0.1
-                  },
-                  {
-                    label: 'Happy',
-                    data: [<%= journal %>].map(entry => entry.happinessLevel),
-                    fill: false,
-                    borderColor: 'orange',
-                    tension: 0.1
-                  },
-                  {
-                    label: 'Lonely',
-                    data: [<%= journal %>].map(entry => entry.lonelinessLevel),
-                    fill: false,
-                    borderColor: 'blue',
-                    tension: 0.1
-                  }
-                ]
-              },
-              options: {
-                scales: {
-                  y: {
-                    beginAtZero: true
-                  }
-                }
-              }
-            });
-          </script> -->
-
-      </div>
+    </div>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const polar = document.getElementById('myPolarChart');
+  new Chart(polar, {
+    type: 'polarArea',
+    data: {
+      labels: ['Craving', 'Anxiety', 'Excitement', 'Bored', 'Sad', 'Happy', 'Lonely'],
+      datasets: [{
+        label: 'Average',
+        data: [<%= moodAverage(journal) %>],
+        backgroundColor: [
+          '#9333ea', //Craving
+          '#86efac', //Anxiety
+          '#f6523b', //Excitement
+          '#3bf6de ', //Bored
+          '#3b82f6', //Sad
+          '#f6af3b', //Happy
+          '#f63b82', //Lonely
+        ],
+        borderColor: '#111827'
+      }]
+    },
+    options: {
+      plugins: {
+        title: {
+          display: true,
+          text: 'Your Average Mood and Craving Levels',
+          color: 'white',
+          font: {
+            size: 22
+          }
+        },
+        legend: {
+          display: true,
+          labels: {
+            color: 'white',
+            font: {
+              size: 15
+            }
+          }
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: true,
+      scales: {
+        r: {
+          grid: {
+            color: 'white'
+          },
+          ticks: {
+            color: 'white',
+            backdropColor: '#111827'
+          }
+        }
+      },
+      devicePixelRatio: 1
+    }
+  });
+</script>
